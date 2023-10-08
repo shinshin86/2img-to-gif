@@ -54,6 +54,8 @@ Access to `localhost:7860`.
 
 ## Google Colab
 
+**Now it still doesn't work correctly.**
+
 To use on Google Colab, execute the following command
 
 ```
@@ -63,7 +65,7 @@ To use on Google Colab, execute the following command
 !wget https://github.com/nihui/rife-ncnn-vulkan/releases/download/20221029/rife-ncnn-vulkan-20221029-ubuntu.zip
 !unzip rife-ncnn-vulkan-20221029-ubuntu
 
-!echo "RIFE_NCNN_VULKAN_PATH =./rife-ncnn-vulkan/rife-ncnn-vulkan" > .env
+!echo "RIFE_NCNN_VULKAN_PATH =./rife-ncnn-vulkan-20221029-ubuntu/rife-ncnn-vulkan" > .env
 
 !pip install -r requirements.txt
 
