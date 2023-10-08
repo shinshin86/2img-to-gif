@@ -2,6 +2,7 @@ import gradio as gr
 import os
 import uuid
 import subprocess
+import concurrent.futures
 from PIL import Image
 from dotenv import load_dotenv
 
@@ -23,9 +24,24 @@ def generate_gif_from_images(start_img, end_img, output_gif_path="output.gif"):
     # Generation a intermediate image
     for _ in range(6):
         new_imgs = []
-        for j in range(len(image_paths) - 1):
-            inter_img = generate_intermediate_frame(image_paths[j], image_paths[j+1], f"temp/generated_{uuid.uuid4().hex}.png")
-            new_imgs.extend([image_paths[j], inter_img])
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = [
+                executor.submit(generate_intermediate_frame,
+                                image_paths[j],
+                                image_paths[j+1],
+                                f"temp/generated_{uuid.uuid4().hex}.png")
+                for j in range(len(image_paths) - 1)
+            ]
+
+            for j in range(len(image_paths) - 1):
+                new_imgs.append(image_paths[j])
+                new_imgs.append(None)  # placeholder for a new frame
+
+            for i, future in enumerate(futures):
+                try:
+                    new_imgs[2*i + 1] = future.result()
+                except Exception as e:
+                    print(f"Generated an exception: {e}")
 
         new_imgs.append(image_paths[-1])
         image_paths = new_imgs
