@@ -67,7 +67,7 @@ To use on Google Colab, execute the following command
 
 !echo "RIFE_NCNN_VULKAN_PATH =./rife-ncnn-vulkan-20221029-ubuntu/rife-ncnn-vulkan" > .env
 
-!pip install -r requirements.txt
+!pip install gradio python-dotenv
 
 !python launch.py --share
 ```
