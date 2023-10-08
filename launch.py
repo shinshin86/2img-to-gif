@@ -3,6 +3,7 @@ import os
 import uuid
 import subprocess
 import concurrent.futures
+import argparse
 from PIL import Image
 from dotenv import load_dotenv
 
@@ -11,6 +12,9 @@ TEMP_DIR = "temp"
 load_dotenv()
 rife_ncnn_vulkan_path = os.getenv("RIFE_NCNN_VULKAN_PATH")
 
+parser = argparse.ArgumentParser(description="Launch the 2img-to-gif on Gradio Interface")
+parser.add_argument("--share", action="store_true", help="Enable sharing the app")
+args = parser.parse_args()
 
 def generate_intermediate_frame(img_path1, img_path2, output_path):
     cmd = [rife_ncnn_vulkan_path, "-0", img_path1, "-1", img_path2, "-o", output_path]
@@ -86,4 +90,4 @@ def process_images(img1, img2):
 image1 = gr.Image(shape=(224, 224), type="filepath", label="Image 1")
 image2 = gr.Image(shape=(224, 224), type="filepath", label="Image 2")
 output_image = gr.Image(type="filepath", label="Output Image")
-gr.Interface(fn=process_images, inputs=[image1, image2], outputs=output_image).launch()
+gr.Interface(fn=process_images, inputs=[image1, image2], outputs=output_image).launch(share=args.share)

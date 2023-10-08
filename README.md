@@ -52,7 +52,23 @@ Access to `localhost:7860`.
 
 ![gradion web ui](./images/gradio_webui_image.png)
 
+## Google Colab
 
+To use on Google Colab, execute the following command
+
+```
+!git clone https://github.com/shinshin86/2img-to-gif.git
+%cd 2img-to-gif
+
+!wget https://github.com/nihui/rife-ncnn-vulkan/releases/download/20221029/rife-ncnn-vulkan-20221029-ubuntu.zip
+!unzip rife-ncnn-vulkan-20221029-ubuntu
+
+!echo "RIFE_NCNN_VULKAN_PATH =./rife-ncnn-vulkan/rife-ncnn-vulkan" > .env
+
+!pip install -r requirements.txt
+
+!python launch.py --share
+```
 
 ## Special thanks
 
