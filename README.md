@@ -45,7 +45,7 @@ rye sync
 Finally, run the following command to launch Gradio's Web UI.
 
 ```
-python main.py
+python launch.py
 ```
 
 Access to `localhost:7860`.
