@@ -59,6 +59,8 @@ Access to `localhost:7860`.
 To use on Google Colab, execute the following command
 
 ```
+!apt-get install -y libvulkan-dev
+
 !git clone https://github.com/shinshin86/2img-to-gif.git
 %cd 2img-to-gif
 
